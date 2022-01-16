@@ -9,21 +9,29 @@ namespace kurs
 {
     class Particle
     {
+        public int ParticlesCount = 500;
         public int Radius; // радиус частицы
         public float X; // X координата положения частицы в пространстве
         public float Y; // Y координата положения частицы в пространстве
-
+        public int Direction = 0; // вектор направления в градусах куда сыпет эмиттер
+        public int Spreading = 360; // разброс частиц относительно Direction
         public float SpeedX; // скорость перемещения по оси X
         public float SpeedY; // скорость перемещения по оси Y
         public float Life;
-        // добавили генератор случайных чисел
+
+        public Color FromColor = Color.Red;
+        public Color ToColor = Color.Black;
+
+        public Color ColorFrom = Color.White; // начальный цвет частицы
+        public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
+        
         public static Random rand = new Random();
 
         // конструктор по умолчанию будет создавать кастомную частицу
         public Particle()
         {
-            var direction = (double)rand.Next(360);
-            var speed = 1 + rand.Next(10);
+            var direction = (0);
+            var speed = 1 + rand.Next(50);
 
             // рассчитываем вектор скорости
             SpeedX = (float)(Math.Cos(direction / 180 * Math.PI) * speed);
@@ -55,8 +63,7 @@ namespace kurs
         public class ParticleColorful : Particle
         {
             // два новых поля под цвет начальный и конечный
-            public Color FromColor;
-            public Color ToColor;
+           
 
             // для смеси цветов
             public static Color MixColor(Color color1, Color color2, float k)
@@ -82,6 +89,7 @@ namespace kurs
 
                 b.Dispose();
             }
+            public virtual void ResetParticle(Particle particle) { }
         }
         }
 }
