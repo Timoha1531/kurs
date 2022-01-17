@@ -13,7 +13,7 @@ namespace kurs
     public partial class Form1 : Form
     {
         Ellipse ellipse; float ellipseAngle = 0f;
-        Emiter emitter = new Emiter(); // добавили эмиттер
+        Emiter emitter = new Emiter(); 
         List<Ellipse> ellipses = new List<Ellipse>();
         float Engalspeed1 =1;
         public Form1()
@@ -127,6 +127,16 @@ namespace kurs
                     ellipse.R = trackBar4.Value;
                 }
             }
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
