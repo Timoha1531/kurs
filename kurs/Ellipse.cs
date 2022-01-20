@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace kurs
 {
-    public class Ellipse
+     class Ellipse
     {
         public float R;
         public float X, Y;
@@ -30,5 +30,6 @@ namespace kurs
               2*R
           );
         }
+       
     }
 }

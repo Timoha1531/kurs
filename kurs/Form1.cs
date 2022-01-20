@@ -16,9 +16,11 @@ namespace kurs
         Emiter emitter = new Emiter(); 
         List<Ellipse> ellipses = new List<Ellipse>();
         float Engalspeed1 =1;
+      
         public Form1()
         {
             InitializeComponent();
+            
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
             ellipse = new Ellipse(40, picDisplay.Width / 2, picDisplay.Height / 2);
             ellipses.Add(ellipse);
@@ -40,7 +42,7 @@ namespace kurs
             {
                 
                 g.Clear(Color.White);
-                RemoweColor();
+                ColorEllipse.RemoweColor(ellipses,emitter,trackBar4.Value);
                 emitter.Render(g);
                 foreach(Ellipse ell in ellipses)
                 {
@@ -74,28 +76,7 @@ namespace kurs
             }
         }
       
-       public void RemoweColor()
-        {
-            float pifagor = 0;
-            foreach (Ellipse ell in ellipses)
-            {
-                if (ell is ColorEllipse)
-                {
-                    foreach (Particle particle in emitter.particles)
-                    {
-                        float newX = ell.X - particle.X;
-                        float newY = ell.Y - particle.Y;
-                        pifagor = (float)(Math.Sqrt(newX * newX + newY * newY));
-                        if (pifagor <= trackBar4.Value  )
-                        {
-                            particle.FromColor = ell.color;
-                            particle.ToColor = ell.color;
-                        }
-                    }
-                }
-            }
-
-        }
+      
         private void picDisplay_MouseMove(object sender, MouseEventArgs e)
         {
             
@@ -118,7 +99,7 @@ namespace kurs
             emitter.ParticlesPerTick = trackBar3.Value;
         }
 
-        private void trackBar4_Scroll(object sender, EventArgs e)
+        public void trackBar4_Scroll(object sender, EventArgs e)
         {
             foreach(Ellipse ellipse in ellipses)
             {
@@ -128,6 +109,7 @@ namespace kurs
                 }
             }
         }
+       
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
