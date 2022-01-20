@@ -9,7 +9,9 @@ namespace kurs
 {
     class Emiter
     {
+        
         public List<Particle> particles = new List<Particle>();
+        
         public float X;
         public float Y;
         public float GravitationX = 0;
@@ -23,7 +25,9 @@ namespace kurs
         public int RadiusMax = 10; 
         public int LifeMin = 20; 
         public int LifeMax = 100; 
-        public int ParticlesPerTick = 5; 
+        public int ParticlesPerTick = 5;
+
+        public List<ColorEllipse> colorEllipses = new List<ColorEllipse>();
 
         public Color ColorFrom = Color.Red; 
         public Color ColorTo = Color.FromArgb(0, Color.Blue); 
@@ -81,13 +85,17 @@ namespace kurs
                 }
                 else
                 {
-                    
                     particle.SpeedX += GravitationX;
                     particle.SpeedY += GravitationY;
 
 
                     particle.X += particle.SpeedX;
                     particle.Y += particle.SpeedY;
+
+                    foreach (var elipse in colorEllipses)
+                    {
+                        elipse.ImpactParticle(particle);
+                    }
                 }
             }
             
@@ -108,6 +116,11 @@ namespace kurs
             {
                 particle.Draw(g);
             }
+            foreach (var elipse in colorEllipses)
+            {
+                elipse.Render(g);
+            }
+
         }
     }
 }

@@ -15,6 +15,7 @@ namespace kurs
         Ellipse ellipse; float ellipseAngle = 0f;
         Emiter emitter = new Emiter(); 
         List<Ellipse> ellipses = new List<Ellipse>();
+        
         float Engalspeed1 =1;
       
         public Form1()
@@ -23,11 +24,12 @@ namespace kurs
             
             picDisplay.Image = new Bitmap(picDisplay.Width, picDisplay.Height);
             ellipse = new Ellipse(40, picDisplay.Width / 2, picDisplay.Height / 2);
-            ellipses.Add(ellipse);
-            ellipses.Add(new ColorEllipse(60, picDisplay.Width / 4, picDisplay.Height / 2,Color.Blue));
-            ellipses.Add(new ColorEllipse(60, picDisplay.Width - picDisplay.Width / 4, picDisplay.Height / 2, Color.Pink));
-            ellipses.Add(new ColorEllipse(60, picDisplay.Width /2, picDisplay.Height / 6, Color.Green));
-            ellipses.Add(new ColorEllipse(60, picDisplay.Width / 2, picDisplay.Height-picDisplay.Height / 6, Color.Purple));
+
+            emitter.colorEllipses.Add(new ColorEllipse(60, picDisplay.Width - picDisplay.Width / 4, picDisplay.Height / 2, Color.Pink));
+            emitter.colorEllipses.Add(new ColorEllipse(60, picDisplay.Width / 2, picDisplay.Height / 6, Color.Green));
+            emitter.colorEllipses.Add(new ColorEllipse(60, picDisplay.Width / 2, picDisplay.Height - picDisplay.Height / 6, Color.Purple));
+            emitter.colorEllipses.Add(new ColorEllipse(60, picDisplay.Width / 4, picDisplay.Height / 2, Color.Blue));
+
 
 
         }
@@ -40,16 +42,11 @@ namespace kurs
             
             using (var g = Graphics.FromImage(picDisplay.Image))
             {
-                
+
                 g.Clear(Color.White);
-                ColorEllipse.RemoweColor(ellipses,emitter,trackBar4.Value);
                 emitter.Render(g);
-                foreach(Ellipse ell in ellipses)
-                {
-                   
-                    ell.Render(g);
-                }
-               
+                ellipse.Render(g);
+
             }
 
             picDisplay.Invalidate();
@@ -101,7 +98,7 @@ namespace kurs
 
         public void trackBar4_Scroll(object sender, EventArgs e)
         {
-            foreach(Ellipse ellipse in ellipses)
+            foreach(Ellipse ellipse in emitter.colorEllipses)
             {
                 if(ellipse is ColorEllipse)
                 {

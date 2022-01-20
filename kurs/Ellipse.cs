@@ -20,6 +20,8 @@ namespace kurs
             this.R = R;
             
         }
+
+       
         public virtual void Render(Graphics g)
         {
             g.DrawEllipse(
